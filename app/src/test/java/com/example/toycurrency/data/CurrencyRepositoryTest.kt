@@ -1,15 +1,16 @@
 package com.example.toycurrency.data
 
-import com.example.toycurrency.util.MockCurrencyResponse
+import com.example.toycurrency.data.repo.CurrencyRepository
+import com.example.toycurrency.data.repo.CurrencyRepositoryImpl
+import com.example.toycurrency.service.CurrencyService
 import com.example.toycurrency.util.MockUtil
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 
 class CurrencyRepositoryImplTest {
@@ -26,36 +27,14 @@ class CurrencyRepositoryImplTest {
     @Test
     fun getCurrencyTest() = runBlocking {
         //given
-        whenever(currencyService.getLive(source = "USD", currencies = "KRW,JPY,PHP")).thenReturn(MockUtil.mockCurrencyResponse())
-
-        assertEquals(
-            currencyRepository.getLive(source = "USD", currencies = "KRW,JPY,PHP"),
+        whenever(currencyService.getLive(source = "USD", currencies = "KRW,JPY,PHP")).thenReturn(
             MockUtil.mockCurrencyResponse()
         )
+
+        //when
+        currencyRepository.getLive(source = "USD", currencies = "KRW,JPY,PHP").collectLatest {
+            //then
+            assertEquals(it, MockUtil.mockCurrencyResponse())
+        }
     }
 }
-
-class CurrencyRepositoryImpl(private val currencyService: CurrencyService) : CurrencyRepository {
-
-    override suspend fun getLive(source: String, currencies: String): MockCurrencyResponse =
-        currencyService.getLive(source, currencies)
-}
-
-interface CurrencyService {
-
-    companion object {
-        private const val URL_GET_LIVE = ""
-    }
-
-    @GET(URL_GET_LIVE)
-    suspend fun getLive(
-        @Query("source") source: String,
-        @Query("currencies") currencies: String,
-    ): MockCurrencyResponse
-}
-
-interface CurrencyRepository {
-    suspend fun getLive(source: String, currencies: String): MockCurrencyResponse
-}
-
-

@@ -1,6 +1,6 @@
 package com.example.toycurrency
 
-import com.example.toycurrency.util.MockCurrencyResponse
+import com.example.toycurrency.service.reponse.CurrencyResponse
 import com.example.toycurrency.util.MockUtil
 import com.example.toycurrency.util.mockData
 import kotlinx.serialization.decodeFromString
@@ -19,7 +19,7 @@ class SerializableTest {
         }
 
         //when
-        val getResponse = json.decodeFromString<MockCurrencyResponse>(mockData)
+        val getResponse = json.decodeFromString<CurrencyResponse>(mockData)
 
 
         //then

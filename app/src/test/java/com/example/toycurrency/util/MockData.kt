@@ -1,10 +1,10 @@
 package com.example.toycurrency.util
 
-import kotlinx.serialization.Serializable
+import com.example.toycurrency.service.reponse.CurrencyResponse
 
 object MockUtil {
 
-    fun mockCurrencyResponse() = MockCurrencyResponse(
+    fun mockCurrencyResponse() = CurrencyResponse(
         success = true,
         timestamp = 1671105723,
         source = "USD",
@@ -26,12 +26,3 @@ val mockData =
               }
             }
         """.trimIndent()
-
-
-@Serializable
-data class MockCurrencyResponse(
-    val success: Boolean,
-    val timestamp: Long,
-    val source: String,
-    val quotes: Map<String, Double>
-)
