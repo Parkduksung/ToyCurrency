@@ -1,8 +1,7 @@
 package com.example.toycurrency.di
 
-import com.example.toycurrency.constant.Constants.BASE_CURRENCY_URL
+
 import com.example.toycurrency.data.repo.CurrencyRepositoryImpl
-import com.example.toycurrency.domain.repository.CurrencyRepository
 import com.example.toycurrency.service.CurrencyService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -15,20 +14,16 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-
-    private val json = Json {
-        ignoreUnknownKeys = true
-        prettyPrint = true
-    }
+object TestAppModule {
 
     @Provides
     @Singleton
     fun provideCurrencyService(converter: Converter.Factory): CurrencyService {
         return Retrofit.Builder()
-            .baseUrl(BASE_CURRENCY_URL)
+            .baseUrl("")
             .addConverterFactory(converter)
             .build()
             .create(CurrencyService::class.java)
@@ -36,13 +31,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideSerializableConverterFactory(): Converter.Factory =
+        Json {
+            ignoreUnknownKeys = true
+            prettyPrint = true
+        }.asConverterFactory(MediaType.parse("application/json")!!)
+
+
+    @Provides
+    @Singleton
     fun provideCurrencyRepository(service: CurrencyService): CurrencyRepository {
         return CurrencyRepositoryImpl(service)
     }
-
-    @kotlinx.serialization.ExperimentalSerializationApi
-    @Provides
-    @Singleton
-    fun provideSerializableConverterFactory(): Converter.Factory =
-        json.asConverterFactory(MediaType.parse("application/json")!!)
 }

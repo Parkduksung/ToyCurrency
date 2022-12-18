@@ -1,7 +1,7 @@
 package com.example.toycurrency.data
 
-import com.example.toycurrency.data.repo.CurrencyRepository
 import com.example.toycurrency.data.repo.CurrencyRepositoryImpl
+import com.example.toycurrency.domain.repository.CurrencyRepository
 import com.example.toycurrency.service.CurrencyService
 import com.example.toycurrency.util.MockUtil
 import com.nhaarman.mockitokotlin2.mock

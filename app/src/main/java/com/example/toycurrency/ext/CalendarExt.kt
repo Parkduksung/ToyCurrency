@@ -6,4 +6,4 @@ import android.icu.text.SimpleDateFormat
 
 @SuppressLint("SimpleDateFormat")
 fun Long?.convertTimeString(pattern : String) : String =
-    SimpleDateFormat(pattern).format(this)
+    SimpleDateFormat(pattern).format(this?.times(1000))
