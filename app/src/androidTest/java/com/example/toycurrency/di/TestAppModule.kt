@@ -2,6 +2,7 @@ package com.example.toycurrency.di
 
 
 import com.example.toycurrency.data.repo.CurrencyRepositoryImpl
+import com.example.toycurrency.domain.repository.CurrencyRepository
 import com.example.toycurrency.service.CurrencyService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -21,7 +22,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideCurrencyService(converter: Converter.Factory): CurrencyService {
+    fun provideFakeCurrencyService(converter: Converter.Factory): CurrencyService {
         return Retrofit.Builder()
             .baseUrl("")
             .addConverterFactory(converter)
@@ -31,7 +32,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideSerializableConverterFactory(): Converter.Factory =
+    fun provideFakeSerializableConverterFactory(): Converter.Factory =
         Json {
             ignoreUnknownKeys = true
             prettyPrint = true
@@ -40,7 +41,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideCurrencyRepository(service: CurrencyService): CurrencyRepository {
+    fun provideFakeCurrencyRepository(service: CurrencyService): CurrencyRepository {
         return CurrencyRepositoryImpl(service)
     }
 }
