@@ -1,4 +1,4 @@
-package com.example.toycurrency.presentation
+package com.example.toycurrency.presentation.currency
 
 import com.example.toycurrency.domain.model.CurrencyItem
 

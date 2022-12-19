@@ -1,4 +1,4 @@
-package com.example.toycurrency.presentation
+package com.example.toycurrency.presentation.currency
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

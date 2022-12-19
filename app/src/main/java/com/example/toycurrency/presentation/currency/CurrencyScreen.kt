@@ -1,4 +1,4 @@
-package com.example.toycurrency.presentation
+package com.example.toycurrency.presentation.currency
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -14,11 +14,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.toycurrency.presentation.components.ListPicker
-import com.example.toycurrency.presentation.CurrencyViewModel.Companion.INIT_NATION_INDEX
-import com.example.toycurrency.presentation.CurrencyViewModel.Companion.nationList
-import com.example.toycurrency.presentation.components.InputRemittance
-import com.example.toycurrency.presentation.components.ItemResultText
+import com.example.toycurrency.presentation.currency.components.ListPicker
+import com.example.toycurrency.presentation.currency.CurrencyViewModel.Companion.INIT_NATION_INDEX
+import com.example.toycurrency.presentation.currency.CurrencyViewModel.Companion.nationList
+import com.example.toycurrency.presentation.currency.components.InputRemittance
+import com.example.toycurrency.presentation.currency.components.ItemResultText
 
 @Composable
 fun CurrencyScreen(viewModel: CurrencyViewModel = hiltViewModel()) {
@@ -69,7 +69,8 @@ fun CurrencyScreen(viewModel: CurrencyViewModel = hiltViewModel()) {
                     text = "수취금액은 ${state.currencyItem?.recipientMoney.orEmpty()} 입니다",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 16.dp),
+                        .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 16.dp)
+                        .semantics { testTag = "ResultRecipientMoney" },
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold

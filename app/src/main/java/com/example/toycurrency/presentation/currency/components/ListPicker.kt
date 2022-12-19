@@ -1,4 +1,4 @@
-package com.example.toycurrency.presentation.components
+package com.example.toycurrency.presentation.currency.components
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*

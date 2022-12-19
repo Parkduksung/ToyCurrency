@@ -1,4 +1,4 @@
-package com.example.toycurrency.ui.theme
+package com.example.toycurrency.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

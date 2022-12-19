@@ -3,6 +3,7 @@ package com.example.toycurrency.presentation
 import com.example.toycurrency.domain.model.CurrencyItem
 import com.example.toycurrency.domain.model.ResponseToItemConverter
 import com.example.toycurrency.domain.usecase.get_currency_live.GetCurrencyLiveUseCase
+import com.example.toycurrency.presentation.currency.CurrencyViewModel
 import com.example.toycurrency.util.MockUtil
 import com.example.toycurrency.util.Result
 import com.nhaarman.mockitokotlin2.mock
