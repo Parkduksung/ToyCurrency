@@ -27,14 +27,12 @@ class CurrencyRepositoryImplTest {
     @Test
     fun getCurrencyTest() = runBlocking {
         //given
-        whenever(currencyService.getLive(source = "USD", currencies = "KRW,JPY,PHP")).thenReturn(
+        whenever(currencyService.getLive(source = "USD", currencies = "KRW")).thenReturn(
             MockUtil.mockCurrencyResponse()
         )
 
-        //when
-        currencyRepository.getLive(source = "USD", currencies = "KRW,JPY,PHP").collectLatest {
-            //then
-            assertEquals(it, MockUtil.mockCurrencyResponse())
-        }
+        //when, then
+        assertEquals(currencyRepository.getLive(source = "USD", currencies = "KRW"), MockUtil.mockCurrencyResponse())
+
     }
 }

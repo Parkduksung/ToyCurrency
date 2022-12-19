@@ -1,5 +1,6 @@
 package com.example.toycurrency.util
 
+import com.example.toycurrency.domain.model.CurrencyItem
 import com.example.toycurrency.service.reponse.CurrencyResponse
 
 object MockUtil {
@@ -8,7 +9,15 @@ object MockUtil {
         success = true,
         timestamp = 1671105723,
         source = "USD",
-        quotes = mapOf("USDKRW" to 1310.749618, "USDJPY" to 136.5695, "USDPHP" to 55.806502)
+        quotes = mapOf("USDKRW" to 1310.749618)
+    )
+
+    fun mockCurrencyItem() = CurrencyItem(
+        remittanceCountry = "USD",
+        recipientCountry = "KRW",
+        exchangeRate = "1,310.75 KRW/USD",
+        timestamp = "2022-12-19 09:20",
+        recipientMoney = "131,074.96KRW"
     )
 
 }
@@ -20,9 +29,7 @@ val mockData =
               "timestamp": 1671105723,
               "source": "USD",
               "quotes": {
-                "USDKRW": 1310.749618,
-                "USDJPY": 136.5695,
-                "USDPHP": 55.806502
+                "USDKRW": 1310.749618
               }
             }
         """.trimIndent()
