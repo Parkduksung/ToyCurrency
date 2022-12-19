@@ -12,14 +12,21 @@ data class CurrencyItem(
     val recipientMoney: String
 )
 
-fun CurrencyResponse.asCurrencyItem(recipientCountry: String, money: Int): CurrencyItem {
-    val rate = quotes?.get(source + recipientCountry)
 
-    return CurrencyItem(
-        remittanceCountry = source.orEmpty(),
-        recipientCountry = recipientCountry,
-        exchangeRate = DecimalFormat("#,###.00").format(rate) + " $recipientCountry/$source",
-        timestamp = timestamp.convertTimeString("yyyy-MM-dd HH:mm"),
-        recipientMoney = DecimalFormat("#,###.00").format(rate?.times(money)) + recipientCountry
-    )
+object ResponseToItemConverter {
+    fun toCurrencyItem(
+        response: CurrencyResponse,
+        recipientCountry: String,
+        money: Int
+    ): CurrencyItem {
+        val rate = response.quotes?.get(response.source + recipientCountry)
+
+        return CurrencyItem(
+            remittanceCountry = response.source.orEmpty(),
+            recipientCountry = recipientCountry,
+            exchangeRate = DecimalFormat("#,###.00").format(rate) + " $recipientCountry/${response.source}",
+            timestamp = response.timestamp.convertTimeString("yyyy-MM-dd HH:mm"),
+            recipientMoney = DecimalFormat("#,###.00").format(rate?.times(money)) + recipientCountry
+        )
+    }
 }
