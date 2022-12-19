@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ToyCurrency"
-include ':app'
+include(":app")
